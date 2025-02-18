@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wistlist Are Here</title>
+    <link rel="icon" href="imgrelated/iconforhomepage" type="image/x-icon">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: cornsilk;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 250px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card img {
+            width: 100%;
+            position: sticky;
+            border-radius: 8px;
+        }
+        .card h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .card p {
+            color: #d86a8a;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: auto;
+        }
+        .buttons button {
+            padding: 8px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .buy, .remove {
+            background: #d86a8a;
+            color: #fff;
+        }
+        .buy a:hover, .remove a:hover{
+            transform: scale(1.03);
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+        }
+        footer a {
+            padding-bottom: 35px;
+            text-decoration: none;
+            color: #4a4a4a;
+            margin: 0 10px;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #d86a8a;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Favourites</h1>
+    <div class="gallery" id="favourites-gallery"></div>
+    <script>
+        const favouritesGallery = document.getElementById("favourites-gallery");
+        const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+        if (favourites.length === 0) {
+            favouritesGallery.innerHTML = "<p>No favourites added yet!</p>";
+        } 
+        else {
+            favourites.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.price}</p>
+                    <div class="buttons">
+                        <button class="buy" onclick="buyProduct('${product.id}')">Buy</button>
+                        <button class="remove" onclick="removeFromFavourites('${product.id}')">Remove</button>
+                    </div>
+                `;
+                favouritesGallery.appendChild(card);
+            });
+        }
+        //buy
+        function buyProduct(productId) {
+        const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+        const product = favourites.find(item => item.id === productId);
+        if (product) {
+            localStorage.setItem("selectedProduct", JSON.stringify(product));
+            window.location.href = "buy.html"; 
+        } else {
+            alert("Product not found!");
+        }
+        }
+        function removeFromFavourites(productId) {
+            const updatedFavourites = favourites.filter(item => item.id !== productId);
+            localStorage.setItem("favourites", JSON.stringify(updatedFavourites));
+            alert("Removed from Favourites!");
+            location.reload();
+        }
+    </script>
+    <footer>
+        <a href="#">Back to Top</a>
+        <a href="index.html">Back to Home</a>
+        <a href="living.html">Back to Living</a>
+    </footer>
+</body>
+</html>

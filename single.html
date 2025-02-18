@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Sofas</title>
+    <link rel="icon" href="imgrelated/iconforhomepage" type="image/x-icon">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">  
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="imgrelated/iconforhomepage" alt="Softyfy Logo" >
+            <h1>COZYFY</h1>
+        </div>
+        <div class="nav-links">
+            <a href="favorites.html"><i class='bx bxs-heart'></i>Favorites</a>
+        </div>
+    </nav>
+    <main>
+        <h1>WELCOME TO COZYFY</h1>
+        <h1>SINGLE SOFA's</h1>
+    <div class="gallery">
+        <div class="product-gallery" id="product-gallery">
+            <div class="card" data-price="26000" data-name="Solo Luxe Sofa" data-id="26" >
+                <img src="imgrelated/single1.jpg" title="Comfort in Every Sit." alt="Solo Luxe Sofa">
+                <h3>Solo Luxe Sofa</h3>
+                <p>₹26,000</p>
+                <div class="buttons">
+                    <button class="fav" ><i class="bx bx-heart"></i><a href="favorites.html"> Favorite </a></button>
+                    <button class="buy" onclick="buyProduct(26)">Buy</button>
+                </div>
+            </div>
+            <div class="card" data-price="21900" data-name="Single Serenity Sofa" data-id="27">
+                <img src="imgrelated/single2.jpg" title="Single Serenity Sofa." alt="Single Serenity Sofa">
+                <h3>Single Serenity Sofa</h3>
+                <p>₹21,900</p>
+                <div class="buttons">
+                    <button class="fav"><i class="bx bx-heart"></i> <a href="favorites.html"> Favorite </a></button>
+                    <button class="buy" onclick="buyProduct(27)">Buy</button>
+                </div>
+            </div>
+
+            <div class="card" data-price="19700" data-name="Cozy Nook Sofa" data-id="28">
+                <img src="imgrelated/single3.jpg" title="Compact Comfort, Maximum Relaxation." alt="Cozy Nook Sofa">
+                <h3>Cozy Nook Sofa</h3>
+                <p>₹19,700</p>
+                <div class="buttons">
+                    <button class="fav"><i class="bx bx-heart"></i> <a href="favorites.html"> Favorite </a></button>
+                    <button class="buy" onclick="buyProduct(28)">Buy</button>
+                </div>
+            </div>
+            <div class="card" data-price="14000" data-name="Solo Retreat Sofa" data-id="29">
+                <img src="imgrelated/single4.jpg" title="Where Comfort Meets Style.">
+                <h3>Solo Retreat Sofa</h3>
+                <p>₹14,000</p>
+                <div class="buttons">
+                    <button class="fav"><i class="bx bx-heart"></i> <a href="favorites.html"> Favorite </a></button>
+                    <button class="buy" onclick="buyProduct(29)">Buy</button>
+                </div>
+            </div>
+            <div class="card" data-price="18600" data-name="Pure Bliss Sofa" data-id="30">
+                <img src="imgrelated/single5.jpg" title="Your Space, Your Comfort." alt="Pure Bliss Sofa">
+                <h3>Pure Bliss Sofa</h3>
+                <p>₹18,600</p>
+                <div class="buttons">
+                    <button class="fav"><i class="bx bx-heart"></i> <a href="favorites.html"> Favorite </a></button>
+                    <button class="buy" onclick="buyProduct(30)">Buy</button>
+                </div>
+            </div>
+        </div> 
+    </div>
+<script>
+    // Add to Favourites functionality
+    document.querySelectorAll(".fav").forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            const productCard = this.closest(".card");
+            const product = {
+                id: productCard.getAttribute("data-id"),
+                name: productCard.querySelector("h3").innerText,
+                price: productCard.querySelector("p").innerText,
+                img: productCard.querySelector("img").src,
+            };
+            let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+            if (!favourites.some(item => item.id === product.id)) {
+                favourites.push(product);
+                localStorage.setItem("favourites", JSON.stringify(favourites));
+                alert("Added to Favourites!");
+            } else {
+                alert("This product is already in Favourites!");
+            }
+        });
+    });
+     // add to buy
+        function buyProduct(productId) {
+        const productCard = document.querySelector(`.card[data-id="${productId}"]`);
+        const product = {
+            id: productCard.getAttribute("data-id"),
+            name: productCard.querySelector("h3").innerText,
+            price: productCard.querySelector("p").innerText,
+            img: productCard.querySelector("img").src
+        };
+        localStorage.setItem("selectedProduct", JSON.stringify(product));
+        window.location.href = "buy.html";
+    }
+</script>
+    </main>
+    <footer>
+        <a href="#">Back to Top</a>
+        <a href="living.html">Back to Living</a>
+        <a href="index.html">Back to Home</a>
+    </footer>
+</body>
+</html>

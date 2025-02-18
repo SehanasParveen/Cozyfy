@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Living</title>
+    <link rel="icon" href="imgrelated/iconforhomepage" type="image/x-icon">
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: cornsilk;
+            background-image: url(imgrelated/backgroundimageliving.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+        }
+        nav {
+            display: flex;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 10px 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+        }
+        .logo h1 {
+            color: black;
+        }
+        .content {
+            text-align: center;
+            padding-top: 100px;
+        }
+        .content h1 {
+            font-size: 3rem;
+        }
+        .content h1:hover {
+            transform: scale(1.03);
+        }
+        .content img {
+            border: 2px solid #4a4a4a;
+            border-radius: 10px;
+            max-height: 20rem;
+            max-width: 20rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        @keyframes glowScale {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(221, 97, 163, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px rgba(221, 97, 163, 0.4);
+            }
+        }
+        #livingRoomImage {
+            animation: glowScale 2s infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+        }
+        .content img:hover {
+            transform: scale(1.03);
+        }
+        .content p {
+            font-size: 2rem;
+            padding: 1rem;
+            color: rgb(27, 25, 25);
+        }
+        #para{
+            color: rgb(242, 230, 214);
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .product-item {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-items: center;
+            max-height: 80%;
+            overflow-y: auto;
+            padding: 20px;
+            background:  rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            justify-items: center; 
+            animation: slide-in 0.5s ease-in-out;
+        }
+        .product-item::-webkit-scrollbar {
+            width: 8px;
+        }
+        .product-item::-webkit-scrollbar-thumb {
+            background-color: #555;
+            border-radius: 4px;
+        }
+        .popup-content {
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 20px;
+            background: #fff;
+        }
+        .popup-content:hover{
+            transform: scale(1.03);
+        }
+        .popup-content img {
+            width: 260px;
+            height: 200px; 
+            object-fit: cover;
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .popup-content h3 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+        }
+        .popup-content p {
+            font-size: 0.9rem;
+        }
+        .navigate-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #352e2e;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        .navigate-btn:hover {
+            background-color: #d86a8a;
+        }
+        .close-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #555;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .close-btn:hover {
+            background-color: #d86a8a;
+        }
+        footer {
+            margin-top: 40px; 
+            text-align: center;
+        }
+        footer a {
+            padding-bottom: 35px;
+            text-decoration: none;
+            color: black;
+            margin: 0 10px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #931136;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="imgrelated/iconforhomepage" alt="Cozyfy Logo">
+            <h1>COZYFY</h1>
+        </div>
+    </nav>
+    <div class="content">
+        <h1>LIVING ROOM</h1>
+        <p> Click the below Image to View More!</p>
+        <img id="livingRoomImage" src="imgrelated/living2.jpg" alt="Click to explore varieties!">
+        <p id="para">The comfort of our sofa can hypnotize you for hours!</p>
+    </div>
+    <!-- Popup for Living Room -->
+    <div class="popup" id="livingRoomPopup">    <!-- LR img effects -->
+        <div class="product-item">  <!-- Pou-up page -->
+            <div class="popup-content">
+                <img src="imgrelated/sectional.jpg" alt="Living Room">
+                <h3>Sectional Sofa</h3>
+                <p>Redefine comfort, piece by piece.
+                    A sectional that adapts to your style and space.</p>
+                <a href="sectional.html" class="navigate-btn">Explore</a>
+                <button class="close-btn">Close</button>
+            </div>
+            <div class="popup-content">
+                <img src="imgrelated/fabric.jpg" alt="Living Room">
+                <h3>Fabric Sofa</h3>
+                <p>Soft to the touch, timeless in style.
+                    A fabric that feels like home.</p>
+                <a href="fabric.html" class="navigate-btn">Explore</a>
+                <button class="close-btn">Close</button>
+            </div>
+            <div class="popup-content">
+                <img src="imgrelated/leather.jpg" alt="Living Room">
+                <h3>Leather Sofa</h3>
+                <p>Luxurious, durable, and effortlessly elegant.
+                    The epitome of sophistication.</p>
+                <a href="leather.html" class="navigate-btn">Explore</a>
+                <button class="close-btn">Close</button>
+            </div>
+            <div class="popup-content">
+                <img src="imgrelated/recliner.jpg" alt="Living Room">
+                <h3>Recliner Sofa</h3>
+                <p>Lean back, relax, and let the day melt away.
+                    Comfort that moves with you.</p>
+                <a href="recliner.html" class="navigate-btn">Explore</a>
+                <button class="close-btn">Close</button>
+            </div>
+            <div class="popup-content">
+                <img src="imgrelated/wooden.jpg" alt="Living Room">
+                <h3>Wooden Sofa</h3>
+                <p>Where tradition meets timeless design.
+                    Crafted for elegance and durability.</p>
+                <a href="wooden.html" class="navigate-btn">Explore</a>
+                <button class="close-btn">Close</button>
+            </div>
+            <div class="popup-content">
+                <img src="imgrelated/pixabay2.jpg" alt="Living Room">
+                <h3>Single Sofa</h3>
+                <p>Your personal retreat in a busy world.
+                    Small in size, big on comfort.</p>
+                <a href="single.html" class="navigate-btn">Explore</a>
+                <button class="close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+<br>
+    <footer>
+        <a href="#">Back to Top</a><br><br>
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const livingRoomImage = document.getElementById("livingRoomImage");
+            const livingRoomPopup = document.getElementById("livingRoomPopup");
+            const closeBtns = document.querySelectorAll(".close-btn");
+            //Explore-styles-YES
+            livingRoomImage.addEventListener("click", () => {
+                livingRoomPopup.style.display = "flex";
+            });
+            //Close-back to LR
+            closeBtns.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    livingRoomPopup.style.display = "none";
+                });
+            });
+            //Any other click in page back to LR
+            livingRoomPopup.addEventListener("click", (event) => {
+                if (event.target === livingRoomPopup) {
+                    livingRoomPopup.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
